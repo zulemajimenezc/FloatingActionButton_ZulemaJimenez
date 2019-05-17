@@ -19,27 +19,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        morph = (FABToolbarLayout) findViewById(R.id.fabtoolbar);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab_label);
+        morph = (FABToolbarLayout) findViewById(R.id.menu_fab);
 
         View uno, dos, tres, cuatro;
 
-        uno = findViewById(R.id.uno);
-        dos = findViewById(R.id.dos);
-        cuatro = findViewById(R.id.cuatro);
-        tres = findViewById(R.id.tres);
+        uno = findViewById(R.id.accion_favorito);
+        dos = findViewById(R.id.accion_buscar);
+        cuatro = findViewById(R.id.accion_carrito);
 
         fab.setOnClickListener(this);
         uno.setOnClickListener(this);
         dos.setOnClickListener(this);
-        tres.setOnClickListener(this);
         cuatro.setOnClickListener(this);
     }
 
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.fab) {
+        if (v.getId() == R.id.menu_fab) {
             morph.show();
         }
 
