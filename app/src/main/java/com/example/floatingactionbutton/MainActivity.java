@@ -19,7 +19,7 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.Interpolator;
 
 public class MainActivity extends AppCompatActivity {
-
+    boolean click = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,51 +27,23 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
         setSupportActionBar(toolbar);
 
-        final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setScaleX(0);
-        fab.setScaleY(0);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setImageResource(R.drawable.close);
 
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-            final Interpolator interpolador = AnimationUtils.loadInterpolator(getBaseContext(),
-                    android.R.interpolator.fast_out_slow_in);
 
-            fab.animate()
-                    .scaleX(1)
-                    .scaleY(1)
-                    .setInterpolator(interpolador)
-                    .setDuration(600)
-                    .setStartDelay(1000)
-                    .setListener(new Animator.AnimatorListener() {
-                        @Override
-                        public void onAnimationStart(Animator animation) {
-
-                        }
-
-                        @Override
-                        public void onAnimationEnd(Animator animation) {
-                            fab.animate()
-                                    .scaleY(0)
-                                    .scaleX(0)
-                                    .setInterpolator(interpolador)
-                                    .setDuration(600)
-                                    .start();
-                        }
-
-                        @Override
-                        public void onAnimationCancel(Animator animation) {
-
-                        }
-
-                        @Override
-                        public void onAnimationRepeat(Animator animation) {
-
-                        }
-                    });
-        }
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Se presionó el FAB", Snackbar.LENGTH_LONG).show();
+                click = !click;
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                    Interpolator interpolador = AnimationUtils.loadInterpolator(getBaseContext(),
+                            android.R.interpolator.fast_out_slow_in);
+
+                    view.animate()
+                            .rotation(click ? 45f : 0)
+                            .setInterpolator(interpolador)
+                            .start();
+                }
             }
         });
     }
